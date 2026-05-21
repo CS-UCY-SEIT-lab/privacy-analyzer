@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Requirement Matcher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="page-bg">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
+    </div>
+
+    <div id="aboutModal" class="about-modal">
+        <div class="about-card">
+            <div class="about-header">
+                <h2>About this platform</h2>
+                <span class="close-btn" onclick="closeAbout()">✕</span>
+            </div>
+
+            <div class="about-body">
+
+               <p> This platform was developed at the University of Cyprus as part of a thesis project. It focuses on the automatic detection of privacy requirements from software documentation and their mapping to relevant user rights.</p> 
+
+               <p> The system supports both manual input and file-based input (e.g. csv, xlsx). It operates in two main stages. First, it identifies which requirements are privacy-related. Then, it maps the detected requirements to corresponding user rights using a hybrid analysis approach.</p> 
+
+               <p> The goal of this tool is to assist developers, researchers and practitioners in understanding how software requirements relate to privacy concepts, improving transparency and supporting compliance-aware development.</p> 
+
+                <p> Additionally, users are encouraged to review the results of Stage 1 carefully. If any requirements are incorrectly classified as privacy-related or non-privacy-related, they can be adjusted before proceeding. This helps improve the overall accuracy of the analysis and ensures more reliable mapping in the next stage.</p>
+
+                <p>  If you have any questions or would like further information, feel free to contact us.</p> 
+                <hr>
+
+                <p class="contact-block">
+                    <strong>Contact</strong><br><br>
+                    Georgia Georgiou<br>
+                    georgiou.s.georgia@ucy.ac.cy<br><br>
+                    Zeta Kapitsaki<br>
+                    gkapi@ucy.ac.cy
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="hero-row">
+            <h1>
+                Automatic Detection of User Rights in Software Documentation
+            </h1>
+
+            <div class="about-inline" onclick="openAbout()">About</div>
+        </div>
+
+        <section class="input-card input-card-featured">
+            <textarea
+                id="requirementsInput"
+                placeholder="Enter one requirement per line.
+
+Example:
+As a user, I want to delete my personal data.
+As a user, I want to correct inaccurate profile information.
+As a user, I want to download a copy of my personal data."
+            ></textarea>
+
+            <div class="helper-row helper-row-box">
+                <p class="hint">
+                    Enter multiple requirements using new lines.
+                </p>
+                <p class="hint file-hint">
+                    Supported formats: <b>.csv</b>, <b>.xlsx</b>
+                </p>
+            </div>
+            
+            <div class="button-group">
+                <button id="matchBtn" type="button" class="btn btn-primary">
+                    Find Matches
+                </button>
+
+                <button id="uploadBtn" type="button" class="btn btn-upload">
+                    Upload and Match
+                </button>
+
+                <input type="file" id="fileInput" accept=".txt,.csv,.xlsx" hidden>
+
+                <button id="clearBtn" type="button" class="btn btn-secondary">
+                    Clear
+                </button>
+            </div>
+
+            <div id="selectedFile" class="selected-file"></div>
+        </section>
+
+        <section class="results-section">
+            <div class="section-heading">
+                <h2>Privacy Relevance</h2>
+            </div>
+
+            <div class="section-description">
+                Review the requirements identified as privacy-related before proceeding to rights mapping.
+            </div>
+
+            <div id="privacyReviewContainer">
+                <div class="message info">
+                    Detected requirements will appear here for review.
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="section-heading">
+                <h2>Legal Mapping Results</h2>
+            </div>
+
+            <div class="section-description">
+                Privacy-related requirements will be mapped to relevant user rights.
+            </div>
+
+            <div id="legalResultsContainer">
+                <div class="message info">
+                    Legal mapping results will appear here after review.
+                </div>
+            </div>
+
+            <div id="exportWrap" class="export-wrap" style="display: none;">
+                <button id="exportBtn" type="button" class="btn btn-export">
+                    Export CSV
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function openAbout() {
+            document.getElementById("aboutModal").style.display = "flex";
+        }
+
+        function closeAbout() {
+            document.getElementById("aboutModal").style.display = "none";
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById("aboutModal");
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
