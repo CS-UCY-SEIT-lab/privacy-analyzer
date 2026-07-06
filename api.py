@@ -38,6 +38,7 @@ MODEL_DIR = BASE_DIR / "model"
 NLTK_DATA_DIR = BASE_DIR / "nltk_data"
 
 BERT_MODEL_PATH = MODEL_DIR / "bert_privacy_model"
+ROBERTA_MODEL_PATH = MODEL_DIR / "roberta_privacy_binary"
 PRIVACY_LABELS_PATH = MODEL_DIR / "labels.json"
 STAGE2_MODEL_PATH = MODEL_DIR / "privacy_pipeline_cpu_safe.joblib"
 
@@ -103,22 +104,23 @@ def preprocess_tfidf(text):
     return " ".join(tokens)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+    
 try:
-    privacy_tokenizer = AutoTokenizer.from_pretrained(str(BERT_MODEL_PATH))
-    privacy_bert_model = AutoModelForSequenceClassification.from_pretrained(str(BERT_MODEL_PATH))
+    privacy_tokenizer = AutoTokenizer.from_pretrained(str(ROBERTA_MODEL_PATH))
+    privacy_bert_model = AutoModelForSequenceClassification.from_pretrained(str(ROBERTA_MODEL_PATH))
     privacy_bert_model.to(device)
     privacy_bert_model.eval()
 except Exception as e:
-    raise RuntimeError(f"Failed to load Stage 1 BERT model: {e}")
+    raise RuntimeError(f"Failed to load Stage 1 RoBERTa model: {e}")
 
+    
 try:
     with open(PRIVACY_LABELS_PATH, "r", encoding="utf-8") as f:
         PRIVACY_LABEL_MAP = json.load(f)
 except Exception as e:
     raise RuntimeError(f"Failed to load privacy labels: {e}")
 
-logger.info("Stage 1 BERT privacy model loaded successfully")
+logger.info("Stage 1 RoBERTa privacy model loaded successfully")
 logger.info("Device: %s", device)
 logger.info("Threshold: %s", BERT_THRESHOLD)
 
