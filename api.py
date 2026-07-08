@@ -40,7 +40,7 @@ NLTK_DATA_DIR = BASE_DIR / "nltk_data"
 BERT_MODEL_PATH = MODEL_DIR / "bert_privacy_model"
 ROBERTA_MODEL_PATH = MODEL_DIR / "roberta_privacy_binary"
 PRIVACY_LABELS_PATH = MODEL_DIR / "labels.json"
-STAGE2_MODEL_PATH = MODEL_DIR / "privacy_pipeline_cpu_safe.joblib"
+STAGE2_MODEL_PATH = MODEL_DIR / "stage2-model.joblib"
 
 MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH", 10 * 1024 * 1024))
 BERT_THRESHOLD = float(os.getenv("BERT_THRESHOLD", 0.50))
