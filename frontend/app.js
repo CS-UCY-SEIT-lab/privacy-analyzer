@@ -29,10 +29,22 @@ let STAGE2_RESULTS = [];
 
 const RIGHTS_INFO = {
 
-    "gdpr-article 5": {
-        right: "Principles relating to processing of personal data",
-        description: "Personal data must be processed lawfully, fairly, and transparently, collected for specified and legitimate purposes, limited to what is necessary, kept accurate, stored only as long as needed, and protected with appropriate security.",
-        article: "GDPR Article 5"
+    "gdpr-article 5(1)b": {
+        right: "Purpose limitation principle",
+        description: "Personal data must be collected for specified and legitimate purposes.",
+        article: "GDPR Article 5(1)a"
+    },
+
+    "gdpr-article 5(1)c": {
+        right: "Data minimisation principle",
+        description: "Personal data must be limited to what is necessary.",
+        article: "GDPR Article 5(1)a"
+    },
+
+    "gdpr-article 5(1)e": {
+        right: "Storage limitation principle",
+        description: "Personal data must be stored only as long as needed.",
+        article: "GDPR Article 5(1)a"
     },
 
     "gdpr-article 6": {
@@ -47,40 +59,28 @@ const RIGHTS_INFO = {
         article: "GDPR Article 7"
     },
 
-    "gdpr-article 12": {
-        right: "Transparent information, communication and modalities for the exercise of the rights of the data subject",
-        description: "Information about processing and the exercise of user rights must be provided in a concise, transparent, intelligible, and easily accessible form, usually free of charge and within the required time limits.",
-        article: "GDPR Article 12"
-    },
-
-    "gdpr-article 13": {
+    "right to know": {
         right: "Information to be provided where personal data are collected from the data subject",
-        description: "When personal data is collected directly from users, they must be informed about the controller, the purposes and legal basis of processing, recipients, retention, and their rights.",
-        article: "GDPR Article 13"
+        description: "(GDPR) When personal data is collected directly from users, they must be informed about the controller, the purposes and legal basis of processing, recipients, retention, and their rights. (CCPA) Consumers can request that a business disclose what personal information it has collected about them, including categories, specific pieces of information, sources, purposes, and categories of third parties to whom the information is disclosed, sold, or shared.",
+        article: "GDPR Article 13, GDPR Article 14, CCPA Right to Know"
     },
 
-    "gdpr-article 14": {
-        right: "Information to be provided where personal data have not been obtained from the data subject",
-        description: "When personal data is obtained indirectly, users must be informed about the source of the data, the purpose of processing, the categories of data involved, retention, and their rights.",
-        article: "GDPR Article 14"
-    },
-
-    "gdpr-article 15": {
+    "right to access": {
         right: "Right of access by the data subject",
-        description: "Users have the right to obtain confirmation that their personal data is being processed, access that data, and receive information about how and why it is processed.",
-        article: "GDPR Article 15"
+        description: "(GDPR) Users have the right to obtain confirmation that their personal data is being processed, access that data, and receive information about how and why it is processed. (CCPA) Consumers can access the personal information a business has collected about them as part of their right to know, including details about its collection, use, disclosure, sale, or sharing.",
+        article: "GDPR Article 15, CCPA Right to Access"
+    },
+    
+    "right to correct": {
+        right: "Right to correct",
+        description: "(GDPR) Users have the right to correct inaccurate personal data and complete incomplete personal data. (CCPA) Consumers can request correction of inaccurate personal information maintained by a business, taking into account the nature of the information and the purposes of processing.",
+        article: "GDPR Article 16, CCPA Right to Correct"
     },
 
-    "gdpr-article 16": {
-        right: "Right to rectification",
-        description: "Users have the right to correct inaccurate personal data and complete incomplete personal data.",
-        article: "GDPR Article 16"
-    },
-
-    "gdpr-article 17": {
-        right: "Right to erasure ('right to be forgotten')",
-        description: "Users have the right to request deletion of their personal data in specific circumstances, such as when the data is no longer needed, consent is withdrawn, or the processing is unlawful.",
-        article: "GDPR Article 17"
+    "right to delete": {
+        right: "Right to delete ('right to be forgotten')",
+        description: "(GDPR) Users have the right to request deletion of their personal data in specific circumstances, such as when the data is no longer needed, consent is withdrawn, or the processing is unlawful. (CCPA) Consumers can request deletion of personal information collected from them, and the business must also direct relevant service providers or contractors to delete it, subject to statutory exceptions.",
+        article: "GDPR Article 17, CCPA Right to Delete"
     },
 
     "gdpr-article 18": {
@@ -101,10 +101,10 @@ const RIGHTS_INFO = {
         article: "GDPR Article 20"
     },
 
-    "gdpr-article 21": {
-        right: "Right to object",
-        description: "Users have the right to object to certain types of processing, especially direct marketing, and in some cases processing must stop unless compelling legitimate grounds exist.",
-        article: "GDPR Article 21"
+    "right to object/opt-out": {
+        right: "Right to object/opt-out",
+        description: "(GDPR) Users have the right to object to certain types of processing, especially direct marketing, and in some cases processing must stop unless compelling legitimate grounds exist. (CCPA) Consumers can direct a business not to sell their personal information and not to share it for cross-context behavioral advertising, and businesses must provide a clear method for exercising this choice.",
+        article: "GDPR Article 21, CCPA Right to Opt-Out of Sale/Sharing"
     },
 
     "gdpr-article 22": {
@@ -113,28 +113,10 @@ const RIGHTS_INFO = {
         article: "GDPR Article 22"
     },
 
-    "gdpr-article 25": {
-        right: "Data protection by design and by default",
-        description: "Systems must include appropriate privacy safeguards from the design stage and ensure that, by default, only personal data necessary for each purpose is processed.",
-        article: "GDPR Article 25"
-    },
-
-    "gdpr-article 29": {
-        right: "Processing under the authority of the controller or processor",
-        description: "Persons acting under the authority of a controller or processor may process personal data only on the controller’s instructions, unless required by law.",
-        article: "GDPR Article 29"
-    },
-
     "gdpr-article 30": {
         right: "Records of processing activities",
         description: "Controllers and processors must maintain records describing their processing activities, including purposes, categories of data, recipients, retention, and security measures where applicable.",
         article: "GDPR Article 30"
-    },
-
-    "gdpr-article 31": {
-        right: "Cooperation with the supervisory authority",
-        description: "Controllers and processors must cooperate with the supervisory authority when requested in the performance of its tasks.",
-        article: "GDPR Article 31"
     },
 
     "gdpr-article 32": {
@@ -143,61 +125,13 @@ const RIGHTS_INFO = {
         article: "GDPR Article 32"
     },
 
-    "gdpr-article 33": {
-        right: "Notification of a personal data breach to the supervisory authority",
-        description: "A personal data breach must be notified to the supervisory authority without undue delay and, where feasible, within 72 hours, unless the breach is unlikely to result in a risk to individuals.",
-        article: "GDPR Article 33"
-    },
-
-    "gdpr-article 34": {
-        right: "Communication of a personal data breach to the data subject",
-        description: "When a personal data breach is likely to result in a high risk to individuals, affected users must be informed without undue delay in clear and understandable language.",
-        article: "GDPR Article 34"
-    },
-
-    "ccpa-right to know": {
-        right: "Right to Know",
-        description: "Consumers can request that a business disclose what personal information it has collected about them, including categories, specific pieces of information, sources, purposes, and categories of third parties to whom the information is disclosed, sold, or shared.",
-        article: "CCPA Right to Know"
-    },
-
-    "ccpa-right to access": {
-        right: "Right to Access",
-        description: "Consumers can access the personal information a business has collected about them as part of their right to know, including details about its collection, use, disclosure, sale, or sharing.",
-        article: "CCPA Right to Access"
-    },
-
-    "ccpa-right to delete": {
-        right: "Right to Delete",
-        description: "Consumers can request deletion of personal information collected from them, and the business must also direct relevant service providers or contractors to delete it, subject to statutory exceptions.",
-        article: "CCPA Right to Delete"
-    },
-
-    "ccpa-right to correct": {
-        right: "Right to Correct",
-        description: "Consumers can request correction of inaccurate personal information maintained by a business, taking into account the nature of the information and the purposes of processing.",
-        article: "CCPA Right to Correct"
-    },
-
-    "ccpa-right to opt-out of sale or sharing": {
-        right: "Right to Opt-Out of Sale or Sharing",
-        description: "Consumers can direct a business not to sell their personal information and not to share it for cross-context behavioral advertising, and businesses must provide a clear method for exercising this choice.",
-        article: "CCPA Right to Opt-Out of Sale/Sharing"
-    },
-
-    "ccpa-right to non-discrimination": {
+    "ccpa-right to non discrimination": {
         right: "Right to Non-Discrimination",
         description: "Consumers must not be discriminated against for exercising their CCPA rights, including through denial of goods or services, different prices, different levels of quality, or other retaliatory treatment, except where permitted by law.",
         article: "CCPA Right to Non-Discrimination"
     },
 
-    "ccpa-notice at collection": {
-        right: "Notice at Collection",
-        description: "Consumers must be informed, at or before the point of collection, about the categories of personal information collected and the purposes for which that information will be used.",
-        article: "CCPA Notice at Collection"
-    },
-
-    "ccpa-right to limit use and disclosure of sensitive personal information": {
+    "ccpa-right to limit use": {
         right: "Right to Limit Use and Disclosure of Sensitive Personal Information",
         description: "Consumers can direct a business to limit the use and disclosure of sensitive personal information to what is necessary to perform services or provide goods reasonably expected by an average consumer, or for other permitted purposes defined by law.",
         article: "CCPA Right to Limit Use/Disclosure of Sensitive Personal Information"
@@ -233,42 +167,25 @@ function parseRequirements(rawText) {
 
 function getDisplayLabel(label) {
     const map = {
-        "gdpr-article 5": "Article 5",
+        "gdpr-article 5(1)b": "Article 5(1)b",
+        "gdpr-article 5(1)c": "Article 5(1)c",
+        "gdpr-article 5(1)e": "Article 5(1)e",
         "gdpr-article 6": "Article 6",
         "gdpr-article 7": "Article 7",
-        "gdpr-article 12": "Article 12",
-        "gdpr-article 13": "Article 13",
-        "gdpr-article 14": "Article 14",
-        "gdpr-article 15": "Article 15",
-        "gdpr-article 16": "Article 16",
-        "gdpr-article 17": "Article 17",
+        "right to know": "Right to know",
+        "right to access": "Right to access",
+        "right to correct": "Right to correct",
+        "right to delete": "Right to delete",
         "gdpr-article 18": "Article 18",
         "gdpr-article 19": "Article 19",
         "gdpr-article 20": "Article 20",
-        "gdpr-article 21": "Article 21",
+        "right to object/opt-out": "Right to object or opt-out",
         "gdpr-article 22": "Article 22",
-        "gdpr-article 25": "Article 25",
-        "gdpr-article 29": "Article 29",
         "gdpr-article 30": "Article 30",
-        "gdpr-article 31": "Article 31",
         "gdpr-article 32": "Article 32",
-        "gdpr-article 33": "Article 33",
-        "gdpr-article 34": "Article 34",
-
-        "ccpa-right to know": "Right to Know",
-        "ccpa-right to access": "Right to Access",
-        "ccpa-right to delete": "Right to Delete",
-        "ccpa-right to correct": "Right to Correct",
-        "ccpa-right to opt-out of sale or sharing": "Right to Opt-Out of Sale/Sharing",
-        "ccpa-right to opt-out": "Right to Opt-Out of Sale/Sharing",
-        "ccpa-right to non-discrimination": "Right to Non-Discrimination",
+        "ccpa-right to non discrimination": "Right to Non-Discrimination",
         "ccpa-non-discrimination": "Right to Non-Discrimination",
-        "ccpa-notice at collection": "Notice at Collection",
-        "ccpa-notice at collection & non-discrimination": "Notice at Collection / Non-Discrimination",
-        "ccpa-right to limit use and disclosure of sensitive personal information":
-            "Right to Limit Use and Disclosure of Sensitive Personal Information",
-        "ccpa-right to limit spi":
-            "Right to Limit Use and Disclosure of Sensitive Personal Information"
+        "ccpa-right to limit use": "Right to Limit Use and Disclosure of Sensitive Personal Information",
     };
 
     return map[label] || label;
@@ -322,58 +239,6 @@ function buildDisplayMatches(matches) {
     const uniqueMatches = [...new Set(matches.map(m => String(m).toLowerCase().trim()))];
     const displayMatches = [];
     const used = new Set();
-
-    const groups = [
-        {
-            groupLabel: "__access_group__",
-            groupTitle: "Right to Access",
-            labels: ["gdpr-article 15", "ccpa-right to access"]
-        },
-        {
-            groupLabel: "__delete_group__",
-            groupTitle: "Right to Deletion / Erasure",
-            labels: ["gdpr-article 17", "ccpa-right to delete"]
-        },
-        {
-            groupLabel: "__correction_group__",
-            groupTitle: "Right to Correction / Rectification",
-            labels: ["gdpr-article 16", "ccpa-right to correct"]
-        },
-        {
-            groupLabel: "__information_group__",
-            groupTitle: "Right to Information / Notice",
-            labels: ["gdpr-article 13", "gdpr-article 14", "ccpa-notice at collection"]
-        },
-        {
-            groupLabel: "__optout_group__",
-            groupTitle: "Right to Object / Opt-Out",
-            labels: ["gdpr-article 21", "ccpa-right to opt-out", "ccpa-right to opt-out of sale or sharing"]
-        }
-    ];
-
-    groups.forEach(group => {
-        const matchedLabels = group.labels.filter(label => uniqueMatches.includes(label));
-
-        if (matchedLabels.length > 1) {
-            displayMatches.push({
-                kind: "group",
-                label: group.groupLabel,
-                right: group.groupTitle,
-                children: matchedLabels.map(label => {
-                    const info = getRightInfo(label);
-                    used.add(label);
-
-                    return {
-                        kind: "standard",
-                        label: label,
-                        right: info.right,
-                        description: info.description,
-                        article: info.article
-                    };
-                })
-            });
-        }
-    });
 
     uniqueMatches.forEach(match => {
         if (used.has(match)) return;
